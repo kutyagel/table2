@@ -46,6 +46,28 @@ function renderTable(){
     }
 
 }
+function validateFields(lastHTMLname, firstHTMLname, petHTML){
+    let result = true
+    if (lastHTMLname.value === '') {
+        let result = false
+        const apa = lastHTMLname.parentElement
+        const error = apa.querySelector('.error')
+        error.innerHTML='KÖTELEZŐ VEZETÉKNÉV MEGADÁSA'
+    }
+    if (firstHTMLname.value === '') {
+        let result = false
+        const apa = firstHTMLname.parentElement
+        const error = apa.querySelector('.error')
+        error.innerHTML='KÖTELEZŐ KERESZTNÉV MEGADÁSA'
+    }
+    if (petHTML.value === '') {
+        let result = false
+        const apa = petHTML.parentElement
+        const error = apa.querySelector('.error')
+        error.innerHTML='KÖTELEZŐ HÁZIÁLLAT MEGADÁSA'
+    }
+    return result
+}
 
 let array = [
     {
@@ -128,12 +150,12 @@ form.addEventListener("submit",function(e){
             married: marriedvalue,
             pet: petvalue
         }
+    if (validateFields(lastname, firstname1, pet)){
     array.push(newPerson)
-    console.log(array)
     tbody.innerHTML = ""
     renderTable()
-
-
+    }
+    console.log(array)
 }
 );
 renderTable()
